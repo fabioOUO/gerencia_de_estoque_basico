@@ -24,7 +24,7 @@ public class Estoque {
     private long quantidade;
 
     @OneToOne
-    @JoinColumn(name = "produtoCodigo")
+    @JoinColumn(name = "produtoCodigo", unique = true)
     private Produto produto;
 
     private LocalDateTime dataAtualizacao = LocalDateTime.now();
