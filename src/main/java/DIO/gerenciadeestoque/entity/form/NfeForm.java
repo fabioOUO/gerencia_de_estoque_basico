@@ -22,6 +22,9 @@ public class NfeForm {
     private String chave;
 
     @NotNull
+    private long statusCodeNfeCodigo;
+
+    @NotNull
     private long clienteCodigo;
 
     @NotNull

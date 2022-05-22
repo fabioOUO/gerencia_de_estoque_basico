@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -28,10 +29,20 @@ public class Nfe {
 
     private long quantidade;
 
+
+    @NotNull
     @OneToOne
     @JoinColumn(name = "clienteCodigo")
     private Cliente cliente;
 
+
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "statusCodeNfeCodigo")
+    private StatusCodeNfe statusCodeNfe;
+
+
+    @NotNull
     @OneToOne
     @JoinColumn(name = "produtoCodigo")
     private Produto produto;
