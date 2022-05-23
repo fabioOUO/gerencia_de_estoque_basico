@@ -47,7 +47,7 @@ public class EstoqueServiceImpl implements IEstoqueService {
     @Override
     public Estoque delete(Estoque estoque) {
         estoqueRepository.delete(estoque);
-        return null;
+        return estoque;
     }
 
     @Override
