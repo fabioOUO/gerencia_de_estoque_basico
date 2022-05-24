@@ -28,7 +28,7 @@ public class Produto {
     @JoinColumn(name = "ncmCodigo")
     private Ncm NCM;
 
-    private double valor;
+    private double valorUnitario;
 
     private double pesoBruto;
 

@@ -24,7 +24,7 @@ public class ProdutoForm {
     @NonNull
     @Positive
     @NumberFormat
-    private double valor;
+    private double valorUnitario;
 
     @Positive
     @NumberFormat

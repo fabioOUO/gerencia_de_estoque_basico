@@ -28,7 +28,7 @@ public class ProdutoServiceImpl implements IProdutoService {
 
         produto.setNCM(ncm);
         produto.setDescricao(produtoForm.getDescricao());
-        produto.setValor(produtoForm.getValor());
+        produto.setValorUnitario(produtoForm.getValorUnitario());
         produto.setPesoBruto(produtoForm.getPesoBruto());
         produto.setPesoLiquido(produtoForm.getPesoLiquido());
         produto.setDataAtualizacao(LocalDateTime.now());
@@ -60,7 +60,7 @@ public class ProdutoServiceImpl implements IProdutoService {
 
         produto.setNCM(ncm);
         produto.setDescricao(formUpdate.getDescricao());
-        produto.setValor(formUpdate.getValor());
+        produto.setValorUnitario(formUpdate.getValorUnitario());
         produto.setPesoBruto(formUpdate.getPesoBruto());
         produto.setPesoLiquido(formUpdate.getPesoLiquido());
         produto.setDataAtualizacao(LocalDateTime.now());
