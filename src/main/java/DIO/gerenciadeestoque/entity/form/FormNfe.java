@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NfeForm {
+public class FormNfe {
 
     private long codigo;
 

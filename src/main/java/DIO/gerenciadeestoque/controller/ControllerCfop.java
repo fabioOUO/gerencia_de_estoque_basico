@@ -2,8 +2,8 @@ package DIO.gerenciadeestoque.controller;
 
 
 import DIO.gerenciadeestoque.entity.Cfop;
-import DIO.gerenciadeestoque.entity.form.CfopForm;
-import DIO.gerenciadeestoque.service.impl.CfopServiceImpl;
+import DIO.gerenciadeestoque.entity.form.FormCfop;
+import DIO.gerenciadeestoque.service.Implementation.ServiceImplementationCfop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +14,13 @@ import java.util.List;
 public class ControllerCfop {
 
     @Autowired
-    private CfopServiceImpl service;
+    private ServiceImplementationCfop service;
 
     final private String nameRouter = "/cfop";
 
     @PostMapping(nameRouter)
-    public Cfop create(@Valid @RequestBody CfopForm cfopForm) {
-        return service.create(cfopForm);
+    public Cfop create(@Valid @RequestBody FormCfop formCfop) {
+        return service.create(formCfop);
     }
 
     @GetMapping(nameRouter)
@@ -49,7 +49,7 @@ public class ControllerCfop {
     }
 
     @PutMapping(nameRouter + "/{id}")
-    public Cfop update(@PathVariable long id, @Valid @RequestBody CfopForm cfopForm) {
-        return service.update(id, cfopForm);
+    public Cfop update(@PathVariable long id, @Valid @RequestBody FormCfop formCfop) {
+        return service.update(id, formCfop);
     }
 }

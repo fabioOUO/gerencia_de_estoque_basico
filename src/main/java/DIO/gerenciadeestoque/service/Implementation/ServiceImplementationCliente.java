@@ -1,10 +1,10 @@
-package DIO.gerenciadeestoque.service.impl;
+package DIO.gerenciadeestoque.service.Implementation;
 
 
 import DIO.gerenciadeestoque.entity.Cliente;
-import DIO.gerenciadeestoque.entity.form.ClienteForm;
-import DIO.gerenciadeestoque.repository.ClienteRepository;
-import DIO.gerenciadeestoque.service.IClienteService;
+import DIO.gerenciadeestoque.entity.form.FormCliente;
+import DIO.gerenciadeestoque.repository.RepositoryCliente;
+import DIO.gerenciadeestoque.service.ServiceCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ClienteServiceImpl implements IClienteService {
+public class ServiceImplementationCliente implements ServiceCliente {
 
     @Autowired
-    private ClienteRepository repository;
+    private RepositoryCliente repository;
 
     @Override
-    public Cliente create(ClienteForm clienteForm) {
+    public Cliente create(FormCliente formCliente) {
         Cliente cliente = new Cliente();
-        cliente.setNome(clienteForm.getNome());
-        cliente.setEmail(clienteForm.getEmail());
+        cliente.setNome(formCliente.getNome());
+        cliente.setEmail(formCliente.getEmail());
         cliente.setDataAtualizacao(LocalDateTime.now());
         cliente.setDataCricao(LocalDateTime.now());
 
@@ -47,7 +47,7 @@ public class ClienteServiceImpl implements IClienteService {
 
 
     @Override
-    public Cliente update(long codigo, ClienteForm formUpdate) {
+    public Cliente update(long codigo, FormCliente formUpdate) {
 
         Cliente cliente = this.get(codigo);
         cliente.setNome(formUpdate.getNome());

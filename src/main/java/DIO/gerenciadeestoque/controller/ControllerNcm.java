@@ -1,8 +1,8 @@
 package DIO.gerenciadeestoque.controller;
 
 import DIO.gerenciadeestoque.entity.Ncm;
-import DIO.gerenciadeestoque.entity.form.NcmForm;
-import DIO.gerenciadeestoque.service.impl.NcmServiceImpl;
+import DIO.gerenciadeestoque.entity.form.FormNcm;
+import DIO.gerenciadeestoque.service.Implementation.ServiceImplementationNcm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class ControllerNcm {
 
     @Autowired
-    private NcmServiceImpl service;
+    private ServiceImplementationNcm service;
 
     final private String nameRouter = "/ncm";
 
@@ -43,12 +43,12 @@ public class ControllerNcm {
     }
 
     @PostMapping(nameRouter)
-    public Ncm create(@Valid @RequestBody NcmForm ncmForm) {
-        return service.create(ncmForm);
+    public Ncm create(@Valid @RequestBody FormNcm formNcm) {
+        return service.create(formNcm);
     }
 
     @PutMapping(nameRouter + "/{id}")
-    public Ncm update(@PathVariable long id, @Valid @RequestBody NcmForm ncmForm) {
-        return service.update(id, ncmForm);
+    public Ncm update(@PathVariable long id, @Valid @RequestBody FormNcm formNcm) {
+        return service.update(id, formNcm);
     }
 }

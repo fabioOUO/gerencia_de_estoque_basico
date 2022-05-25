@@ -1,8 +1,8 @@
 package DIO.gerenciadeestoque.controller;
 
 import DIO.gerenciadeestoque.entity.Nfe;
-import DIO.gerenciadeestoque.entity.form.NfeForm;
-import DIO.gerenciadeestoque.service.impl.NfeServiceImpl;
+import DIO.gerenciadeestoque.entity.form.FormNfe;
+import DIO.gerenciadeestoque.service.Implementation.ServiceImplementationNfe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +15,13 @@ public class ControllerNfe {
 
 
     @Autowired
-    NfeServiceImpl service;
+    ServiceImplementationNfe service;
 
     final private String nameRouter = "/nfe";
 
     @PostMapping(nameRouter)
-    public Nfe create(@Valid @RequestBody NfeForm nfeForm) {
-        return service.create(nfeForm);
+    public Nfe create(@Valid @RequestBody FormNfe formNfe) {
+        return service.create(formNfe);
     }
 
     @GetMapping(nameRouter)
@@ -50,7 +50,7 @@ public class ControllerNfe {
     }
 
     @PutMapping(nameRouter + "/{id}")
-    public Nfe create(@PathVariable long id, @Valid @RequestBody NfeForm nfeForm) {
-        return service.update(id, nfeForm);
+    public Nfe create(@PathVariable long id, @Valid @RequestBody FormNfe formNfe) {
+        return service.update(id, formNfe);
     }
 }

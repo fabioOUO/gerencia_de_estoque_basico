@@ -2,8 +2,8 @@ package DIO.gerenciadeestoque.controller;
 
 
 import DIO.gerenciadeestoque.entity.Produto;
-import DIO.gerenciadeestoque.entity.form.ProdutoForm;
-import DIO.gerenciadeestoque.service.impl.ProdutoServiceImpl;
+import DIO.gerenciadeestoque.entity.form.FormProduto;
+import DIO.gerenciadeestoque.service.Implementation.ServiceImplementationProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +15,13 @@ public class ControllerProduto {
 
 
     @Autowired
-    private ProdutoServiceImpl service;
+    private ServiceImplementationProduto service;
 
     final private String nameRouter = "/produto";
 
     @PostMapping(nameRouter)
-    public Produto create(@Valid @RequestBody ProdutoForm produtoForm) {
-        return service.create(produtoForm);
+    public Produto create(@Valid @RequestBody FormProduto formProduto) {
+        return service.create(formProduto);
     }
 
     @GetMapping(nameRouter)
@@ -50,7 +50,7 @@ public class ControllerProduto {
     }
 
     @PutMapping(nameRouter + "/{id}")
-    public Produto create(@PathVariable long id, @Valid @RequestBody ProdutoForm produtoForm) {
-        return service.update(id, produtoForm);
+    public Produto create(@PathVariable long id, @Valid @RequestBody FormProduto formProduto) {
+        return service.update(id, formProduto);
     }
 }

@@ -1,8 +1,8 @@
 package DIO.gerenciadeestoque.controller;
 
 import DIO.gerenciadeestoque.entity.StatusCodeNfe;
-import DIO.gerenciadeestoque.entity.form.StatusCodeNfeForm;
-import DIO.gerenciadeestoque.service.impl.StatusCodeNfeServiceImpl;
+import DIO.gerenciadeestoque.entity.form.FormStatusCodeNfe;
+import DIO.gerenciadeestoque.service.Implementation.ServiceImplementationStatusCodeNfe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 public class ControllerStatusCodeNfe {
     @Autowired
-    private StatusCodeNfeServiceImpl service;
+    private ServiceImplementationStatusCodeNfe service;
 
     final private String nameRouter = "/statusCode";
 
@@ -42,12 +42,12 @@ public class ControllerStatusCodeNfe {
     }
 
     @PostMapping(nameRouter)
-    public StatusCodeNfe create(@Valid @RequestBody StatusCodeNfeForm statusCodeNfeForm) {
-        return service.create(statusCodeNfeForm);
+    public StatusCodeNfe create(@Valid @RequestBody FormStatusCodeNfe formStatusCodeNfe) {
+        return service.create(formStatusCodeNfe);
     }
 
     @PutMapping(nameRouter + "/{id}")
-    public StatusCodeNfe update(@PathVariable long id, @Valid @RequestBody StatusCodeNfeForm statusCodeNfeForm) {
-        return service.update(id, statusCodeNfeForm);
+    public StatusCodeNfe update(@PathVariable long id, @Valid @RequestBody FormStatusCodeNfe formStatusCodeNfe) {
+        return service.update(id, formStatusCodeNfe);
     }
 }

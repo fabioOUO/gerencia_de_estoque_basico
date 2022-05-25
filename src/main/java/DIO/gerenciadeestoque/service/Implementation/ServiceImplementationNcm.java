@@ -1,9 +1,9 @@
-package DIO.gerenciadeestoque.service.impl;
+package DIO.gerenciadeestoque.service.Implementation;
 
 import DIO.gerenciadeestoque.entity.Ncm;
-import DIO.gerenciadeestoque.entity.form.NcmForm;
-import DIO.gerenciadeestoque.repository.NcmRepository;
-import DIO.gerenciadeestoque.service.INcmService;
+import DIO.gerenciadeestoque.entity.form.FormNcm;
+import DIO.gerenciadeestoque.repository.RepositoryNcm;
+import DIO.gerenciadeestoque.service.ServiceNcm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class NcmServiceImpl implements INcmService {
+public class ServiceImplementationNcm implements ServiceNcm {
 
     @Autowired
-    private NcmRepository repository;
+    private RepositoryNcm repository;
 
     @Override
-    public Ncm create(NcmForm form) {
+    public Ncm create(FormNcm form) {
         Ncm ncm = new Ncm();
         ncm.setDescricao(form.getDescricao());
         ncm.setDataAtualizacao(LocalDateTime.now());
@@ -45,7 +45,7 @@ public class NcmServiceImpl implements INcmService {
 
 
     @Override
-    public Ncm update(long codigo, NcmForm formUpdate) {
+    public Ncm update(long codigo, FormNcm formUpdate) {
 
         Ncm ncm = this.get(codigo);
         ncm.setDescricao(formUpdate.getDescricao());

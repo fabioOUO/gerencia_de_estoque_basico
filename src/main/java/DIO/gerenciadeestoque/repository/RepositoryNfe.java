@@ -1,9 +1,9 @@
 package DIO.gerenciadeestoque.repository;
 
-import DIO.gerenciadeestoque.entity.Produto;
+import DIO.gerenciadeestoque.entity.Nfe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+public interface RepositoryNfe extends JpaRepository<Nfe, Long> {
 }

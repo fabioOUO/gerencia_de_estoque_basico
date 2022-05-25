@@ -1,9 +1,8 @@
 package DIO.gerenciadeestoque.controller;
 
 import DIO.gerenciadeestoque.entity.Cliente;
-import DIO.gerenciadeestoque.entity.Ncm;
-import DIO.gerenciadeestoque.entity.form.ClienteForm;
-import DIO.gerenciadeestoque.service.impl.ClienteServiceImpl;
+import DIO.gerenciadeestoque.entity.form.FormCliente;
+import DIO.gerenciadeestoque.service.Implementation.ServiceImplementationCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +13,13 @@ import java.util.List;
 public class ControllerCliente {
 
     @Autowired
-    private ClienteServiceImpl service;
+    private ServiceImplementationCliente service;
 
     final private String nameRouter = "/cliente";
 
     @PostMapping(nameRouter)
-    public Cliente create(@Valid @RequestBody ClienteForm clienteForm) {
-        return service.create(clienteForm);
+    public Cliente create(@Valid @RequestBody FormCliente formCliente) {
+        return service.create(formCliente);
     }
 
     @GetMapping(nameRouter)
@@ -49,8 +48,8 @@ public class ControllerCliente {
     }
 
     @PutMapping(nameRouter + "/{id}")
-    public Cliente update(@PathVariable long id, @Valid @RequestBody ClienteForm clienteForm) {
-        return service.update(id, clienteForm);
+    public Cliente update(@PathVariable long id, @Valid @RequestBody FormCliente formCliente) {
+        return service.update(id, formCliente);
     }
 
 }

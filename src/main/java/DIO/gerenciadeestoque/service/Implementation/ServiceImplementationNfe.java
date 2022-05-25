@@ -1,9 +1,9 @@
-package DIO.gerenciadeestoque.service.impl;
+package DIO.gerenciadeestoque.service.Implementation;
 
 import DIO.gerenciadeestoque.entity.*;
-import DIO.gerenciadeestoque.entity.form.NfeForm;
+import DIO.gerenciadeestoque.entity.form.FormNfe;
 import DIO.gerenciadeestoque.repository.*;
-import DIO.gerenciadeestoque.service.INfeService;
+import DIO.gerenciadeestoque.service.ServiceNfe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,70 +12,70 @@ import java.util.List;
 
 
 @Service
-public class NfeServiceImpl implements INfeService {
+public class ServiceImplementationNfe implements ServiceNfe {
 
     @Autowired
-    private NfeRepository nfeRepository;
+    private RepositoryNfe repositoryNfe;
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private RepositoryProduto repositoryProduto;
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private RepositoryCliente repositoryCliente;
 
     @Autowired
-    private StatusCodeNfeRepository statusCodeNfeRepository;
+    private RepositoryStatusCodeNfe repositoryStatusCodeNfe;
 
     @Autowired
-    private EstoqueRepository estoqueRepository;
+    private RepositoryEstoque repositoryEstoque;
 
     @Override
-    public Nfe create(NfeForm nfeForm) {
+    public Nfe create(FormNfe formNfe) {
 
         Nfe nfe = new Nfe();
 
         try {
 
-            Produto produto = produtoRepository.getById(nfeForm.getProdutoCodigo());
-            Cliente cliente = clienteRepository.getById(nfeForm.getClienteCodigo());
-            StatusCodeNfe statusCodeNfe = statusCodeNfeRepository.getById(nfeForm.getStatusCodeNfeCodigo());
+            Produto produto = repositoryProduto.getById(formNfe.getProdutoCodigo());
+            Cliente cliente = repositoryCliente.getById(formNfe.getClienteCodigo());
+            StatusCodeNfe statusCodeNfe = repositoryStatusCodeNfe.getById(formNfe.getStatusCodeNfeCodigo());
 
             nfe.setStatusCodeNfe(statusCodeNfe);
             nfe.setProduto(produto);
             nfe.setCliente(cliente);
-            nfe.setChave(nfeForm.getChave());
-            nfe.setQuantidade(nfeForm.getQuantidade());
-            nfe.setValorTotal(nfeForm.getValorTotal());
+            nfe.setChave(formNfe.getChave());
+            nfe.setQuantidade(formNfe.getQuantidade());
+            nfe.setValorTotal(formNfe.getValorTotal());
             nfe.setDataEmissao(LocalDateTime.now());
 
             //Atualiza estoque
             this.updateEstoque(produto, nfe.getQuantidade());
 
-            return nfeRepository.save(nfe);
+            return repositoryNfe.save(nfe);
 
         }catch (Exception e){
             //Atualiza estoque
-            Produto produto = produtoRepository.getById(nfeForm.getProdutoCodigo());
+            Produto produto = repositoryProduto.getById(formNfe.getProdutoCodigo());
 
-            this.updateEstoque(produto, (-1 * nfeForm.getQuantidade()));
+            this.updateEstoque(produto, (-1 * formNfe.getQuantidade()));
         }
         return nfe;
     }
 
     @Override
     public Nfe get(long codigo) {
-        return nfeRepository.getById(codigo);
+        return repositoryNfe.getById(codigo);
     }
 
     @Override
     public List<Nfe> getAll() {
-        return nfeRepository.findAll();
+        return repositoryNfe.findAll();
     }
 
     @Override
     public Nfe delete(Nfe nfe) {
 
-        nfeRepository.delete(nfe);
+        repositoryNfe.delete(nfe);
 
         Produto produto = nfe.getProduto();
         long quantidade = (-1 * nfe.getQuantidade());
@@ -87,12 +87,12 @@ public class NfeServiceImpl implements INfeService {
     }
 
     @Override
-    public Nfe update(long codigo, NfeForm formUpdate) {
+    public Nfe update(long codigo, FormNfe formUpdate) {
 
         Nfe nfe = this.get(codigo);
-        Produto produto = produtoRepository.getById(formUpdate.getProdutoCodigo());
-        Cliente cliente = clienteRepository.getById(formUpdate.getClienteCodigo());
-        StatusCodeNfe statusCodeNfe = statusCodeNfeRepository.getById(formUpdate.getStatusCodeNfeCodigo());
+        Produto produto = repositoryProduto.getById(formUpdate.getProdutoCodigo());
+        Cliente cliente = repositoryCliente.getById(formUpdate.getClienteCodigo());
+        StatusCodeNfe statusCodeNfe = repositoryStatusCodeNfe.getById(formUpdate.getStatusCodeNfeCodigo());
         long quantidadeDiferenca = formUpdate.getQuantidade() - nfe.getQuantidade();
 
         nfe.setStatusCodeNfe(statusCodeNfe);
@@ -107,11 +107,11 @@ public class NfeServiceImpl implements INfeService {
             this.updateEstoque(produto, quantidadeDiferenca);
         }
 
-        return nfeRepository.save(nfe);
+        return repositoryNfe.save(nfe);
     }
 
     public void updateEstoque(Produto produto, long quantidade){
-        List<Estoque> estoqueProdutos = estoqueRepository.findAll();
+        List<Estoque> estoqueProdutos = repositoryEstoque.findAll();
         Estoque estoqueProduto = new Estoque();
 
         //Se nao existir cria um novo registro de estoque
@@ -132,6 +132,6 @@ public class NfeServiceImpl implements INfeService {
             }
         }
 
-        estoqueRepository.save(estoqueProduto);
+        repositoryEstoque.save(estoqueProduto);
     }
 }

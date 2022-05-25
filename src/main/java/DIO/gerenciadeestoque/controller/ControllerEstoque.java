@@ -1,9 +1,8 @@
 package DIO.gerenciadeestoque.controller;
 
-import DIO.gerenciadeestoque.entity.Cliente;
 import DIO.gerenciadeestoque.entity.Estoque;
-import DIO.gerenciadeestoque.entity.form.EstoqueForm;
-import DIO.gerenciadeestoque.service.impl.EstoqueServiceImpl;
+import DIO.gerenciadeestoque.entity.form.FormEstoque;
+import DIO.gerenciadeestoque.service.Implementation.ServiceImplementationEstoque;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +13,13 @@ import java.util.List;
 public class ControllerEstoque {
 
     @Autowired
-    EstoqueServiceImpl service;
+    ServiceImplementationEstoque service;
 
     final private String nameRouter = "/estoque";
 
     @PostMapping(nameRouter)
-    public Estoque create(@Valid @RequestBody EstoqueForm estoqueForm) {
-        return service.create(estoqueForm);
+    public Estoque create(@Valid @RequestBody FormEstoque formEstoque) {
+        return service.create(formEstoque);
     }
 
     @GetMapping(nameRouter)
@@ -49,7 +48,7 @@ public class ControllerEstoque {
     }
 
     @PutMapping(nameRouter + "/{id}")
-    public Estoque create(@PathVariable long id, @Valid @RequestBody EstoqueForm estoqueForm) {
-        return service.update(id, estoqueForm);
+    public Estoque create(@PathVariable long id, @Valid @RequestBody FormEstoque formEstoque) {
+        return service.update(id, formEstoque);
     }
 }

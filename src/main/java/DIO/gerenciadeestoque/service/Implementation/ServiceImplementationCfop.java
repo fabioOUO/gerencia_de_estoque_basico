@@ -1,9 +1,9 @@
-package DIO.gerenciadeestoque.service.impl;
+package DIO.gerenciadeestoque.service.Implementation;
 
 import DIO.gerenciadeestoque.entity.Cfop;
-import DIO.gerenciadeestoque.entity.form.CfopForm;
-import DIO.gerenciadeestoque.repository.CfopRepository;
-import DIO.gerenciadeestoque.service.ICfopService;
+import DIO.gerenciadeestoque.entity.form.FormCfop;
+import DIO.gerenciadeestoque.repository.RepositoryCfop;
+import DIO.gerenciadeestoque.service.ServiceCfop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class CfopServiceImpl implements ICfopService {
+public class ServiceImplementationCfop implements ServiceCfop {
 
     @Autowired
-    CfopRepository repository;
+    RepositoryCfop repository;
 
     @Override
-    public Cfop create(CfopForm form) {
+    public Cfop create(FormCfop form) {
         Cfop cfop =  new Cfop();
         cfop.setCodigoCfop(form.getCodigoCfop());
         cfop.setDescricao(form.getDescricao());
@@ -44,7 +44,7 @@ public class CfopServiceImpl implements ICfopService {
     }
 
     @Override
-    public Cfop update(long codigo, CfopForm formUpdate) {
+    public Cfop update(long codigo, FormCfop formUpdate) {
 
         Cfop cfop =  repository.getById(codigo);
         cfop.setCodigoCfop(formUpdate.getCodigoCfop());

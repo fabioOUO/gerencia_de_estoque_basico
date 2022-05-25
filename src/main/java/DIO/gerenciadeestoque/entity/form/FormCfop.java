@@ -3,27 +3,22 @@ package DIO.gerenciadeestoque.entity.form;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClienteForm {
-
+public class FormCfop {
     private long codigo;
 
+    @NonNull
+    private long codigoCfop;
 
-    @NotEmpty(message = "Preencha o campo nome!")
-    private String nome;
-
-    @NotEmpty(message = "Preencha o campo email!")
-    private String email;
+    @NonNull
+    private String descricao;
 
     private LocalDateTime dataAtualizacao;
-
     private LocalDateTime dataCricao;
-
 }
