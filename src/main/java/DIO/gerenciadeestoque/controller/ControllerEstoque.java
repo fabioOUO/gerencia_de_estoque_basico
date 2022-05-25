@@ -16,38 +16,40 @@ public class ControllerEstoque {
     @Autowired
     EstoqueServiceImpl service;
 
-    @PostMapping("/estoque")
-    public Estoque create(@Valid @RequestBody EstoqueForm estoqueForm){
+    final private String nameRouter = "/estoque";
+
+    @PostMapping(nameRouter)
+    public Estoque create(@Valid @RequestBody EstoqueForm estoqueForm) {
         return service.create(estoqueForm);
     }
 
-    @GetMapping("/estoque")
-    public List<Estoque> getAll (){
+    @GetMapping(nameRouter)
+    public List<Estoque> getAll() {
         return service.getAll();
     }
 
-    @GetMapping("/estoque/{id}")
-    public Estoque get (@PathVariable long id){
-        try{
+    @GetMapping(nameRouter + "/{id}")
+    public Estoque get(@PathVariable long id) {
+        try {
             return service.get(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    @DeleteMapping("/estoque/{id}")
-    public Estoque delete (@PathVariable long id){
+    @DeleteMapping(nameRouter + "/{id}")
+    public Estoque delete(@PathVariable long id) {
         try {
             Estoque estoque = service.get(id);
             service.delete(estoque);
             return estoque;
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    @PutMapping("/estoque/{id}")
-    public Estoque create(@PathVariable long id , @Valid @RequestBody EstoqueForm estoqueForm){
+    @PutMapping(nameRouter + "/{id}")
+    public Estoque create(@PathVariable long id, @Valid @RequestBody EstoqueForm estoqueForm) {
         return service.update(id, estoqueForm);
     }
 }

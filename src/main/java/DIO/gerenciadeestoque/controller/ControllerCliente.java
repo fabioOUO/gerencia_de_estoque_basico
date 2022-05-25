@@ -16,38 +16,39 @@ public class ControllerCliente {
     @Autowired
     private ClienteServiceImpl service;
 
-    @PostMapping("/cliente")
-    public Cliente create(@Valid @RequestBody ClienteForm clienteForm) {
+    final private String nameRouter = "/cliente";
 
+    @PostMapping(nameRouter)
+    public Cliente create(@Valid @RequestBody ClienteForm clienteForm) {
         return service.create(clienteForm);
     }
 
-    @GetMapping("/cliente")
+    @GetMapping(nameRouter)
     public List<Cliente> getAll() {
         return service.getAll();
     }
 
-    @GetMapping("/cliente/{id}")
+    @GetMapping(nameRouter + "/{id}")
     public Cliente get(@PathVariable(value = "id") Long id) {
-        try{
+        try {
             return service.get(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    @DeleteMapping("/cliente/{id}")
+    @DeleteMapping(nameRouter + "/{id}")
     public Cliente delete(@PathVariable long id) {
-        try{
+        try {
             Cliente cliente = service.get(id);
             service.delete(cliente);
             return cliente;
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    @PutMapping("/cliente/{id}")
+    @PutMapping(nameRouter + "/{id}")
     public Cliente update(@PathVariable long id, @Valid @RequestBody ClienteForm clienteForm) {
         return service.update(id, clienteForm);
     }

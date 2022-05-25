@@ -12,20 +12,24 @@ import java.util.List;
 @RestController
 public class ControllerNfe {
 
+
+
     @Autowired
     NfeServiceImpl service;
 
-    @PostMapping("/nfe")
+    final private String nameRouter = "/nfe";
+
+    @PostMapping(nameRouter)
     public Nfe create(@Valid @RequestBody NfeForm nfeForm) {
         return service.create(nfeForm);
     }
 
-    @GetMapping("/nfe")
+    @GetMapping(nameRouter)
     public List<Nfe> gelAll() {
         return service.getAll();
     }
 
-    @GetMapping("/nfe/{id}")
+    @GetMapping(nameRouter + "/{id}")
     public Nfe get(@PathVariable long id) {
         try {
             return service.get(id);
@@ -34,7 +38,7 @@ public class ControllerNfe {
         }
     }
 
-    @DeleteMapping("/nfe/{id}")
+    @DeleteMapping(nameRouter + "/{id}")
     public Nfe delete(@PathVariable long id) {
         try {
             Nfe nfe = service.get(id);
@@ -45,9 +49,8 @@ public class ControllerNfe {
         }
     }
 
-    @PutMapping("/nfe/{id}")
+    @PutMapping(nameRouter + "/{id}")
     public Nfe create(@PathVariable long id, @Valid @RequestBody NfeForm nfeForm) {
         return service.update(id, nfeForm);
     }
-
 }

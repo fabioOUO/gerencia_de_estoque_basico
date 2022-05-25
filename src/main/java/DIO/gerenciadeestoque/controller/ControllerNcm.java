@@ -15,12 +15,14 @@ public class ControllerNcm {
     @Autowired
     private NcmServiceImpl service;
 
-    @GetMapping("/ncm")
+    final private String nameRouter = "/ncm";
+
+    @GetMapping(nameRouter)
     public List<Ncm> getAll() {
         return service.getAll();
     }
 
-    @GetMapping("/ncm/{id}")
+    @GetMapping(nameRouter + "/{id}")
     public Ncm get(@PathVariable(value = "id") Long id) {
         try {
             return service.get(id);
@@ -29,7 +31,7 @@ public class ControllerNcm {
         }
     }
 
-    @DeleteMapping("/ncm/{id}")
+    @DeleteMapping(nameRouter + "/{id}")
     public Ncm delete(@PathVariable long id) {
         try {
             Ncm ncm = service.get(id);
@@ -40,12 +42,12 @@ public class ControllerNcm {
         }
     }
 
-    @PostMapping("/ncm")
+    @PostMapping(nameRouter)
     public Ncm create(@Valid @RequestBody NcmForm ncmForm) {
         return service.create(ncmForm);
     }
 
-    @PutMapping("/ncm/{id}")
+    @PutMapping(nameRouter + "/{id}")
     public Ncm update(@PathVariable long id, @Valid @RequestBody NcmForm ncmForm) {
         return service.update(id, ncmForm);
     }

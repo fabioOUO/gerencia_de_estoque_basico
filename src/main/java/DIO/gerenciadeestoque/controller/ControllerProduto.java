@@ -13,20 +13,23 @@ import java.util.List;
 @RestController
 public class ControllerProduto {
 
+
     @Autowired
     private ProdutoServiceImpl service;
 
-    @PostMapping("/produto")
+    final private String nameRouter = "/produto";
+
+    @PostMapping(nameRouter)
     public Produto create(@Valid @RequestBody ProdutoForm produtoForm) {
         return service.create(produtoForm);
     }
 
-    @GetMapping("/produto")
+    @GetMapping(nameRouter)
     public List<Produto> getAll() {
         return service.getAll();
     }
 
-    @GetMapping("/produto/{id}")
+    @GetMapping(nameRouter + "/{id}")
     public Produto get(@PathVariable long id) {
         try {
             return service.get(id);
@@ -35,7 +38,7 @@ public class ControllerProduto {
         }
     }
 
-    @DeleteMapping("/produto/{id}")
+    @DeleteMapping(nameRouter + "/{id}")
     public Produto delete(@PathVariable long id) {
         try {
             Produto produto = service.get(id);
@@ -46,7 +49,7 @@ public class ControllerProduto {
         }
     }
 
-    @PutMapping("/produto/{id}")
+    @PutMapping(nameRouter + "/{id}")
     public Produto create(@PathVariable long id, @Valid @RequestBody ProdutoForm produtoForm) {
         return service.update(id, produtoForm);
     }
