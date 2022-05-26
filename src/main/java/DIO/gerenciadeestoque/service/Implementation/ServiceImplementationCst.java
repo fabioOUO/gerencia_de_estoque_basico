@@ -55,7 +55,6 @@ public class ServiceImplementationCst implements ServiceCst {
         cst.setPis(formUpdate.getPis());
         cst.setCofins(formUpdate.getCofins());
         cst.setDataAtualizacao(LocalDateTime.now());
-        cst.setDataCricao(LocalDateTime.now());
 
         return repository.save(cst);
     }
