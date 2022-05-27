@@ -29,6 +29,9 @@ public class ServiceImplementationNfe implements ServiceNfe {
     @Autowired
     private RepositoryEstoque repositoryEstoque;
 
+    @Autowired
+    RepositoryInforTrib repositoryInforTrib;
+
     @Override
     public Nfe create(FormNfe formNfe) {
 
@@ -38,11 +41,13 @@ public class ServiceImplementationNfe implements ServiceNfe {
 
             Produto produto = repositoryProduto.getById(formNfe.getProdutoCodigo());
             Cliente cliente = repositoryCliente.getById(formNfe.getClienteCodigo());
+            InforTrib inforTrib = repositoryInforTrib.getById(formNfe.getInforTribCodigo());
             StatusCodeNfe statusCodeNfe = repositoryStatusCodeNfe.getById(formNfe.getStatusCodeNfeCodigo());
 
             nfe.setStatusCodeNfe(statusCodeNfe);
             nfe.setProduto(produto);
             nfe.setCliente(cliente);
+            nfe.setInforTrib(inforTrib);
             nfe.setChave(formNfe.getChave());
             nfe.setQuantidade(formNfe.getQuantidade());
             nfe.setValorTotal(formNfe.getValorTotal());
@@ -92,12 +97,14 @@ public class ServiceImplementationNfe implements ServiceNfe {
         Nfe nfe = this.get(codigo);
         Produto produto = repositoryProduto.getById(formUpdate.getProdutoCodigo());
         Cliente cliente = repositoryCliente.getById(formUpdate.getClienteCodigo());
+        InforTrib inforTrib = repositoryInforTrib.getById(formUpdate.getInforTribCodigo());
         StatusCodeNfe statusCodeNfe = repositoryStatusCodeNfe.getById(formUpdate.getStatusCodeNfeCodigo());
         long quantidadeDiferenca = formUpdate.getQuantidade() - nfe.getQuantidade();
 
         nfe.setStatusCodeNfe(statusCodeNfe);
         nfe.setProduto(produto);
         nfe.setCliente(cliente);
+        nfe.setInforTrib(inforTrib);
         nfe.setChave(formUpdate.getChave());
         nfe.setQuantidade(formUpdate.getQuantidade());
         nfe.setValorTotal(formUpdate.getValorTotal());

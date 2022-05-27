@@ -27,9 +27,6 @@ public class Nfe {
     @Column(length = 44, unique = true)
     private String chave;
 
-    private long quantidade;
-
-
     @NotNull
     @OneToOne
     @JoinColumn(name = "clienteCodigo")
@@ -46,6 +43,13 @@ public class Nfe {
     @OneToOne
     @JoinColumn(name = "produtoCodigo")
     private Produto produto;
+
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "inforTribCodigo")
+    private InforTrib inforTrib;
+
+    private long quantidade;
 
     private double valorTotal;
 
